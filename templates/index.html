@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- <link rel="stylesheet" href="styles.css" -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="/static/styles.css"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Fileshare</title>
+</head>
+<body>
+  
+        <div class="topbar">
+            <h1>FILESHARE</h1>
+            <nav class="topcontent">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="updownbar">
+            <div class="uploadside">
+                <form id="uploadForm" enctype="multipart/form-data">
+                    <input type="file" name="file" id="fileInput">
+                    <input type="text" name="key" id="keyInput" placeholder="Enter Key">
+                    <button type="submit">Generate</button>
+                </form>
+            </div>
+            <div class="downloadside">
+                <form id="downloadForm">
+                    <input type="text" name="key" id="downloadKeyInput" placeholder="Enter Key">
+                    <button type="submit">Download</button>
+                </form>
+            </div>
+        </div>
+        <script>
+
+            document.addEventListener('DOMContentLoaded', function () {
+                const uploadForm = document.getElementById('uploadForm');
+                const downloadForm = document.getElementById('downloadForm');
+                const downloadKeyInput = document.getElementById('downloadKeyInput');
+        
+                uploadForm.addEventListener('submit', async function (event) {
+                    event.preventDefault();
+        
+                    const formData = new FormData(uploadForm);
+                    const response = await fetch('/upload', {
+                        method: 'POST',
+                        body: formData,
+                    });
+        
+                    const result = await response.json();
+                    if (result.success) {
+                        alert(`File uploaded successfully with key: ${result.key}`);
+                    } else {
+                        alert(result.message);
+                    }
+                });
+        
+                downloadForm.addEventListener('submit', async function (event) {
+                    event.preventDefault();
+        
+                    const key = downloadKeyInput.value.trim();
+                    if (key) {
+                    
+                        try {
+                            const checkKeyResponse = await fetch(`/check_key/${key}`);
+                            const checkKeyResult = await checkKeyResponse.json();
+                            
+                                
+                            if (checkKeyResult.valid) {
+                                const downloadResponse = await fetch(`/download/${key}`);
+                                if (downloadResponse.ok) {
+                                    const blob = await downloadResponse.blob();
+                                    const link = document.createElement('a');
+                                    link.href = window.URL.createObjectURL(blob);
+                                    link.download = key;
+                                    document.body.appendChild(link);
+                                    link.click();
+                                    document.body.removeChild(link);
+                                } else {
+                                    const errorResponse = await downloadResponse.json();
+                                    alert(errorResponse.message || 'Error downloading file.');
+                                }
+                            } else {
+                                alert('Invalid key. Please enter a valid key.');
+                            }
+                        } catch (error) {
+                            console.error('Error handling download:', error);
+                            alert('Error handling download.');
+                        }
+                    } else {
+                        alert('Please enter a valid key.');
+                    }
+                });
+            });
+        </script>
+        
+</html>
