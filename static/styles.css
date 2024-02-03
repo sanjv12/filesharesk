@@ -4,6 +4,7 @@ body{
     
 }
 .topbar{
+    z-index:1;
     gap: 50px;
      position: fixed;
     top:0;
@@ -36,4 +37,133 @@ body{
 .downloadside{
     padding: 10px; 
     background-color: gainsboro;
+}body{
+    background-color: #caf0f8;
+    height: 10000px;
+    
 }
+.topbar{
+
+    gap: 50px;
+     position: fixed;
+    top:0;
+    left:0;
+    width: 200vw;
+    height: 100px;
+    background-color: #0077b6;
+    display: flex;
+    flex-direction: row;
+}
+.name{
+    padding-left: 40px;
+}
+.topcontent{
+    display: flex;
+    
+    flex-direction: row;
+    justify-content: space-evenly;
+
+}
+.updownbar {
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 0 auto;
+    width: 70%; 
+    border-radius: 20px;
+    margin-top: 200px; 
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    background-color: #00b4d8;
+    gap: 20px;
+    height: auto;
+    box-shadow: 0 0.5em 1.5em -0.5em rgba(88, 71, 116, 0.627);
+}
+.uploadside{
+    text-align: center;
+    justify-content: space-evenly;
+    width: 250px;
+    box-shadow: 0 0.5em 1.5em -0.5em rgba(88, 71, 116, 0.627);
+    border-radius: 20px;
+    padding: 20px; 
+    background-color: #90e0ef;
+}
+.item3{
+    padding: 10px;
+}
+.item2{
+    padding: 5px;
+}
+.item4{
+    padding: 5px;
+}
+.downloadside{
+    text-align: center;
+    width: 270px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    box-shadow: 0 0.5em 1.5em -0.5em rgba(88, 71, 116, 0.627);
+    border-radius: 20px;
+    padding: 10px; 
+    background-color: #90e0ef;
+}
+button {
+    align-self: center;
+    position: relative;
+    display: inline-block;
+    margin: 15px;
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 18px;
+    text-decoration: none;
+    color: #03045e;
+    background: transparent;
+    cursor: pointer;
+    transition: ease-out 0.5s;
+    border: 3px solid #03045e;
+    border-radius: 10px;
+    box-shadow: inset 0 0 0 0 #03045e;
+  }
+  button:hover {
+    color: white;
+    box-shadow: inset 0 -100px 0 0 #03045e;
+  }
+  button:active {
+    transform: scale(0.9);
+  }
+  a{
+    text-decoration: none;
+  }
+  .input {
+    
+    border: 2px solid transparent;
+    width: 15em;
+    height: 2.5em;
+    padding-left: 0.8em;
+    outline: none;
+    overflow: hidden;
+    background-color: #F3F3F3;
+    border-radius: 10px;
+    transition: all 0.5s;
+  }
+  
+  .input:hover,
+  .input:focus {
+    border: 2px solid #4A9DEC;
+    box-shadow: 0px 0px 0px 7px rgb(74, 157, 236, 20%);
+    background-color: white;
+  }
+  input[type="file"]::file-selector-button {
+    
+    border-radius: 30px;
+    padding: 10px;
+    background-color: white;
+    color: #03045e;
+    cursor: pointer;
+    
+}
+input[type="file"]::file-selector-button:hover{
+    color: white;
+    box-shadow: inset 0 -100px 0 0 #03045e;
+  }
